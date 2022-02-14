@@ -11,7 +11,7 @@
     static TreeNode * savedTree; //tree to be returned
     static int savedNumber; //value for use
 
-    char tokenString[MAXTOKENLEN+1];
+    extern char tokenString[MAXTOKENLEN+1];
 
     static int yylex(void);
     int yyerror(char * message);

@@ -45,7 +45,7 @@ typedef struct ScopeListRec
 } * Scope;
 
 // global scope to cover function definitions
-Scope globalScope;
+extern Scope globalScope;
 
 //Scope List to output
 static Scope scopeList[SIZE];

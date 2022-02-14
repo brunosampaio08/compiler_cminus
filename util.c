@@ -9,8 +9,8 @@
 #include "globals.h"
 #include "util.h"
 
-FILE * errorfile;
-FILE * icodefile;
+extern FILE * errorfile;
+extern FILE * icodefile;
 
 /* Procedure printToken prints a token 
  * and its lexeme to the listing file

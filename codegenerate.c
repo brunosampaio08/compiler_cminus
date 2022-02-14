@@ -5,7 +5,7 @@
 #include "codegenerate.h"
 
 /*Arquivo de saida contendo o codigo intermediario*/
-FILE * icodefile;
+extern FILE * icodefile;
 
 /*Vetor para guardar a disponibilidade das variaveis temporarias*/
 int tempAvailable[MAX_TEMP];

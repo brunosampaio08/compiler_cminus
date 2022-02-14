@@ -22,7 +22,7 @@
 #define heapPointer 9497
 
 /* Global variables definition */
-FILE * assemblycode;
+extern FILE * assemblycode;
 FILE * binarycode;
 int codeLine = codeStart;
 

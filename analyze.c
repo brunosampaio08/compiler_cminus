@@ -11,7 +11,7 @@
 #include "util.h"
 #include "symboltable.h"
 
-FILE * errorfile;
+extern FILE * errorfile;
 
 /*
  * To insert to symbol table build-in functions
