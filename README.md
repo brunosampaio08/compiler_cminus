@@ -28,3 +28,10 @@ After compiling 'make clean' will clean all unnecessary files.
 - After make clean it's necessary to make again in order to run ./compiler.
 
 The first part of this compiler (lexical, syntax and semantic analysis) was built along with @ludmilalima. The second part, (intermediary, assembly and binary code generation) was built as a solo project.
+
+## OS:
+
+There's a small OS inside input folder, os.cm:
+- For now this is just a process manager with fixed memory blocks and quantum (clock-cycle based) preemption.
+- Works with target machine.
+- TODO: Tutorial on how to run OS.
