@@ -7,7 +7,7 @@ C- Compiler built based on Kenneth C. Louden's Tiny Compiler available at: "Comp
 
 Target machine's HDL Code (Verilog) available at: https://github.com/brunosampaio08/acc_proccessor
 
-Up-to-date version of this compiler's code available at: https://github.com/brunosampaio08/compiler_c-
+Up-to-date version of this compiler's code available at: https://github.com/brunosampaio08/compiler_cminus
 
 ## Usage:
 
