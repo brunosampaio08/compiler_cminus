@@ -1,7 +1,0 @@
-\----------------------------------\
-ERROS SINTATICOS DO ARQUIVO input/sort.cm:
-
-
-\---------------------------------\
-ERROS SEMANTICOS DO ARQUIVO input/sort.cm:
-
