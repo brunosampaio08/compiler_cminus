@@ -1,0 +1,107 @@
+/*
+
+System calls(implemented in assembly):
+    void changeContext(void) -> unstack all registers (after set baserReg) -> unstack PC last
+    void stackRegisters(void) -> stacks all regs
+    void storeRegisters(int currProc) -> stores registers to array
+    void processFinished(void) -> returns 1 if process sent finish signal, 0 otherwise
+
+Changes in hardware:
+    Add base register (OK -> lacks testing)
+    Addresses are always automatically added to baseReg  (OK -> lacks testing)
+    clockSignal should move PC to an aux reg, change PC to OS and set
+        baseReg to 0 (OK -> lacks testing)
+
+    Implement Transfer Aux to Base Register (TAXBR) instruction (OK -> lacks testing)
+    Implement Check Process Finish (CPF) instruction -> Checks process finish flag and sets 
+        IndexedY to:
+            ->1 if yes, 0 if no (OK -> lacks testing)
+    Implement PusH Program Counter (PHPC) instruction (OK -> lacks testing)
+    Implement PuLl Program Counter (PLPC) instruction (OK -> lacks testing)
+    Implement Set Finish Flag (SFF) instruction (should change PC to OSPC)
+    Implement Set PC (SPC) instruction (transfer savedPC to PC and set BaseReg = AuxReg) 
+        (OK -> lacks testing)
+*/
+int registers[12];
+
+void main(void){
+    int procStatus[2];
+    int isFirstTime[2];
+    int i; int j; int aux; int numProc;
+    int isOSFirstTime;
+    int currProc;
+    int baseReg;
+
+    isOSFirstTime = 1;
+    numProc = 2;
+    currProc = 0;
+    
+    i = 0;
+    while(i < 2){
+        procStatus[i] = 1;
+        i = i+1;
+    }
+
+    i = 0;
+    while(i < 2){
+        isFirstTime[i] = 1;
+        i = i+1;
+    }
+
+    /*clockSignal should change PC to here*/
+
+    /*Syscall that stacks all registers*/
+    if(isOSFirstTime != 1){
+        
+        stackRegisters();
+        
+        isFirstTime[currProc] = 0;
+        
+        /*Syscall that removes registers from stack and stores them to registers array*/
+        storeRegisters(currProc);
+
+        aux = processFinished();
+
+        /*Check if process that just got preempted finished*/
+        if(aux == 1){
+            procStatus[currProc] = 0;
+        }
+
+        /*Start checking if ready from process currProc+1*/
+        i = currProc+1;
+        
+        /*If i > 1 -> next process is process 0*/
+        if(i > 1){
+            i = 0;
+        }
+
+        j = 0;
+        while(i < numProc){
+            if(procStatus[i] == 1){
+                currProc = i;
+                i = 2;
+            }
+            if(i == (numProc-1)){
+                if(j == 0){
+                    i = 0;
+                    j = 1;
+                }
+            }else{
+                i = i+1;
+            }
+        }
+    }
+
+    aux = procStatus[currProc];
+    /*if procStatus[currProc] == 0 -> all procs finished*/
+    if(aux != 0){
+        aux = isFirstTime[currProc]; 
+        if(aux == 0){
+            changeContext(currProc);
+        }else{
+            setPC(currProc);
+        }
+    }
+
+    output(1111);
+}
